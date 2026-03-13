@@ -6,10 +6,14 @@ def mock_keyword_search(keywords: str, limit: int = 10) -> dict:
     kw = keywords.lower()
     products = []
 
-    if any(w in kw for w in ["mosfet", "sic", "fet", "transistor"]):
-        products = _mosfet_products()
+    if any(w in kw for w in ["power module", "igbt module", "sic module", "sixpack", "half bridge module", "module"]):
+        products = _power_module_products()
+    elif any(w in kw for w in ["heatsink", "heat sink", "thermal", "cooling", "cold plate"]):
+        products = _heatsink_products()
     elif any(w in kw for w in ["gate driver", "driver", "ucc", "adum"]):
         products = _gate_driver_products()
+    elif any(w in kw for w in ["mosfet", "sic", "fet", "transistor"]):
+        products = _mosfet_products()
     elif any(w in kw for w in ["capacitor", "cap", "mlcc", "ceramic", "film"]):
         products = _capacitor_products()
     elif any(w in kw for w in ["resistor", "res", "ohm"]):
@@ -31,6 +35,7 @@ def mock_product_details(part_number: str) -> dict:
     """Return mock product details."""
     all_products = (
         _mosfet_products() + _gate_driver_products() + _capacitor_products()
+        + _power_module_products() + _heatsink_products()
     )
     for p in all_products:
         if p["DigiKeyPartNumber"] == part_number or p["ManufacturerPartNumber"] in part_number:
@@ -322,6 +327,164 @@ def _resistor_products() -> list:
                 {"Name": "Power (Watts)", "Value": "0.125W"},
                 {"Name": "Package / Case", "Value": "0805 (2012 Metric)"},
                 {"Name": "Mounting Type", "Value": "Surface Mount"},
+            ],
+            "RoHSStatus": "RoHS Compliant",
+            "LeadStatus": "Lead Free",
+        },
+    ]
+
+
+def _power_module_products() -> list:
+    return [
+        {
+            "DigiKeyPartNumber": "CAB450M12XM3-ND",
+            "ManufacturerPartNumber": "CAB450M12XM3",
+            "Manufacturer": "Wolfspeed",
+            "Description": "SIC MOSFET MODULE 1200V 450A 62MM",
+            "UnitPrice": 485.00,
+            "QuantityAvailable": 120,
+            "DatasheetUrl": "https://assets.wolfspeed.com/uploads/2024/01/Wolfspeed_CAB450M12XM3.pdf",
+            "ProductUrl": "https://www.digikey.com/en/products/detail/wolfspeed/CAB450M12XM3/1234567",
+            "Parameters": [
+                {"Name": "Module Type", "Value": "Half Bridge (2 switches)"},
+                {"Name": "Technology", "Value": "SiC MOSFET"},
+                {"Name": "Voltage - Collector Emitter (Vces)", "Value": "1200V"},
+                {"Name": "Current - Collector (Ic) @ 25°C", "Value": "450A"},
+                {"Name": "Current - Collector (Ic) @ 80°C", "Value": "300A"},
+                {"Name": "Rds On (Max)", "Value": "3.2mΩ"},
+                {"Name": "Power Dissipation (Max)", "Value": "2500W"},
+                {"Name": "Thermal Resistance Junction-Case", "Value": "0.028°C/W"},
+                {"Name": "Package / Case", "Value": "62mm"},
+                {"Name": "Mounting Type", "Value": "Chassis Mount"},
+                {"Name": "Operating Temperature", "Value": "-55°C ~ 175°C"},
+            ],
+            "RoHSStatus": "RoHS Compliant",
+            "LeadStatus": "Lead Free",
+        },
+        {
+            "DigiKeyPartNumber": "FF450R12ME4-ND",
+            "ManufacturerPartNumber": "FF450R12ME4",
+            "Manufacturer": "Infineon Technologies",
+            "Description": "IGBT MODULE 1200V 450A 62MM PRIMEPACK",
+            "UnitPrice": 320.00,
+            "QuantityAvailable": 85,
+            "DatasheetUrl": "https://www.infineon.com/dgdl/Infineon-FF450R12ME4-DataSheet.pdf",
+            "ProductUrl": "https://www.digikey.com/en/products/detail/infineon/FF450R12ME4/2345678",
+            "Parameters": [
+                {"Name": "Module Type", "Value": "Half Bridge (2 switches)"},
+                {"Name": "Technology", "Value": "IGBT4"},
+                {"Name": "Voltage - Collector Emitter (Vces)", "Value": "1200V"},
+                {"Name": "Current - Collector (Ic) @ 25°C", "Value": "450A"},
+                {"Name": "Current - Collector (Ic) @ 80°C", "Value": "300A"},
+                {"Name": "Vce(sat) (Max) @ Ic", "Value": "1.85V @ 450A"},
+                {"Name": "Power Dissipation (Max)", "Value": "3200W"},
+                {"Name": "Thermal Resistance Junction-Case (per IGBT)", "Value": "0.035°C/W"},
+                {"Name": "Thermal Resistance Junction-Case (per Diode)", "Value": "0.063°C/W"},
+                {"Name": "Eon + Eoff (Typ)", "Value": "135mJ @ 600V, 450A"},
+                {"Name": "Package / Case", "Value": "62mm PrimePACK 3"},
+                {"Name": "Mounting Type", "Value": "Chassis Mount"},
+                {"Name": "Operating Temperature", "Value": "-40°C ~ 150°C"},
+            ],
+            "RoHSStatus": "RoHS Compliant",
+            "LeadStatus": "Lead Free",
+        },
+        {
+            "DigiKeyPartNumber": "CAS300M17BM2-ND",
+            "ManufacturerPartNumber": "CAS300M17BM2",
+            "Manufacturer": "Wolfspeed",
+            "Description": "SIC MOSFET MODULE 1700V 300A 62MM",
+            "UnitPrice": 650.00,
+            "QuantityAvailable": 45,
+            "DatasheetUrl": "https://assets.wolfspeed.com/uploads/2024/01/Wolfspeed_CAS300M17BM2.pdf",
+            "ProductUrl": "https://www.digikey.com/en/products/detail/wolfspeed/CAS300M17BM2/3456789",
+            "Parameters": [
+                {"Name": "Module Type", "Value": "Half Bridge (2 switches)"},
+                {"Name": "Technology", "Value": "SiC MOSFET"},
+                {"Name": "Voltage - Collector Emitter (Vces)", "Value": "1700V"},
+                {"Name": "Current - Collector (Ic) @ 25°C", "Value": "300A"},
+                {"Name": "Current - Collector (Ic) @ 80°C", "Value": "225A"},
+                {"Name": "Rds On (Max)", "Value": "5.6mΩ"},
+                {"Name": "Power Dissipation (Max)", "Value": "2900W"},
+                {"Name": "Thermal Resistance Junction-Case", "Value": "0.038°C/W"},
+                {"Name": "Package / Case", "Value": "62mm"},
+                {"Name": "Mounting Type", "Value": "Chassis Mount"},
+                {"Name": "Operating Temperature", "Value": "-55°C ~ 175°C"},
+            ],
+            "RoHSStatus": "RoHS Compliant",
+            "LeadStatus": "Lead Free",
+        },
+    ]
+
+
+def _heatsink_products() -> list:
+    return [
+        {
+            "DigiKeyPartNumber": "ATS-55350D-C1-R0-ND",
+            "ManufacturerPartNumber": "ATS-55350D-C1-R0",
+            "Manufacturer": "Advanced Thermal Solutions",
+            "Description": "HEATSINK 150X100X40MM ALUMINUM",
+            "UnitPrice": 45.00,
+            "QuantityAvailable": 230,
+            "DatasheetUrl": "https://www.qats.com/Products/Heatsinks/ATS-55350D-C1-R0",
+            "ProductUrl": "https://www.digikey.com/en/products/detail/ats/ATS-55350D-C1-R0/4567890",
+            "Parameters": [
+                {"Name": "Type", "Value": "Extruded"},
+                {"Name": "Material", "Value": "Aluminum"},
+                {"Name": "Thermal Resistance @ Natural Convection", "Value": "0.85°C/W"},
+                {"Name": "Thermal Resistance @ 200 LFM", "Value": "0.45°C/W"},
+                {"Name": "Thermal Resistance @ 400 LFM", "Value": "0.30°C/W"},
+                {"Name": "Length", "Value": "150mm"},
+                {"Name": "Width", "Value": "100mm"},
+                {"Name": "Height", "Value": "40mm"},
+                {"Name": "Mounting Type", "Value": "Screw Mount"},
+                {"Name": "Fan Required", "Value": "Optional"},
+            ],
+            "RoHSStatus": "RoHS Compliant",
+            "LeadStatus": "Lead Free",
+        },
+        {
+            "DigiKeyPartNumber": "LA-6-150-B-ND",
+            "ManufacturerPartNumber": "LA 6/150 B",
+            "Manufacturer": "Fischer Elektronik",
+            "Description": "HEATSINK 150X200X50MM HIGH PERFORMANCE",
+            "UnitPrice": 85.00,
+            "QuantityAvailable": 65,
+            "DatasheetUrl": "https://www.fischerelektronik.de/web_fischer/en/heatsinks/la6150b",
+            "ProductUrl": "https://www.digikey.com/en/products/detail/fischer/LA-6-150-B/5678901",
+            "Parameters": [
+                {"Name": "Type", "Value": "Extruded"},
+                {"Name": "Material", "Value": "Aluminum"},
+                {"Name": "Thermal Resistance @ Natural Convection", "Value": "0.45°C/W"},
+                {"Name": "Thermal Resistance @ 200 LFM", "Value": "0.22°C/W"},
+                {"Name": "Thermal Resistance @ 400 LFM", "Value": "0.15°C/W"},
+                {"Name": "Length", "Value": "200mm"},
+                {"Name": "Width", "Value": "150mm"},
+                {"Name": "Height", "Value": "50mm"},
+                {"Name": "Mounting Type", "Value": "Screw Mount"},
+                {"Name": "Fan Required", "Value": "Recommended"},
+            ],
+            "RoHSStatus": "RoHS Compliant",
+            "LeadStatus": "Lead Free",
+        },
+        {
+            "DigiKeyPartNumber": "CP30-G10-ND",
+            "ManufacturerPartNumber": "CP30 G10",
+            "Manufacturer": "Wakefield-Vette",
+            "Description": "COLD PLATE LIQUID COOLED 300X200MM",
+            "UnitPrice": 280.00,
+            "QuantityAvailable": 25,
+            "DatasheetUrl": "https://www.wakefield-vette.com/products/cold-plates/CP30G10",
+            "ProductUrl": "https://www.digikey.com/en/products/detail/wakefield/CP30-G10/6789012",
+            "Parameters": [
+                {"Name": "Type", "Value": "Liquid Cold Plate"},
+                {"Name": "Material", "Value": "Copper/Aluminum"},
+                {"Name": "Thermal Resistance @ 1 GPM", "Value": "0.05°C/W"},
+                {"Name": "Thermal Resistance @ 2 GPM", "Value": "0.03°C/W"},
+                {"Name": "Length", "Value": "300mm"},
+                {"Name": "Width", "Value": "200mm"},
+                {"Name": "Height", "Value": "15mm"},
+                {"Name": "Mounting Type", "Value": "Bolt-on"},
+                {"Name": "Fluid Connection", "Value": "1/4\" NPT"},
             ],
             "RoHSStatus": "RoHS Compliant",
             "LeadStatus": "Lead Free",
